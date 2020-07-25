@@ -1,0 +1,25 @@
+# Python-Projects
+# Extract XML data
+
+import urllib.request, urllib.parse, urllib.error
+import xml.etree.ElementTree as ET
+#import libraries required
+
+link = input('Enter location: ')
+url = urllib.request.urlopen(link).read().decode()
+print('Retrieving', link)
+print('Retrieved', len(url), 'characters')
+#Retrieved the data from link
+
+#data calculation
+Count = 0
+Sum = 0
+data = ET.fromstring(url)
+tags = data.findall('comments/comment')
+
+for tag in tags:
+    Count += 1
+    Sum += int(tag.find('count').text)
+
+print('Count:', Count)
+print('Sum:', Sum)
